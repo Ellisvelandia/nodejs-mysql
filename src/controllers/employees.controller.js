@@ -38,4 +38,10 @@ export const deleteEmployee = async (req, res) => {
   res.sendStatus(204)
 };
 
-export const updateEmployee = (req, res) => res.send("update employee");
+export const updateEmployee = async (req, res) => {
+  const {id} = req.params
+  const {name, salary} = req.body
+const [result] = await pool.query('UPDATE employee SET name = ?, salary = ? WHERE id = ?', [name, salary, id])
+console.log(result)
+res.json('received')
+};
